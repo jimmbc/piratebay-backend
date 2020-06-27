@@ -4,19 +4,26 @@ import bo.edu.ucb.sis.piratebay.model.ProductModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Service
 public class ProductDao {
 
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
+    public ProductDao(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
     public List<ProductModel> findAllActives() {
         // Implmentamos SQL varible binding para evitar SQL INJECTION
-        String query = "SELECT user_id, username, email, phone_number, cat_user_status FROM \"user\" WHERE status = 1";
+        String query = "SELECT a.requisition_id, a.fecha, b.first_name || ' ' || b.first_surname, b.address " +
+                "FROM Requisition a, Client b WHERE a.Client_client_id = b.client_id and a.status= 1";
         List<ProductModel> result = null;
         try {
             result = jdbcTemplate.query(query, new RowMapper<ProductModel>() {
@@ -29,6 +36,8 @@ public class ProductDao {
                 }
             });
         } catch (Exception ex) {
+            System.out.println(query);
+            System.out.println("7845");
             throw new RuntimeException();
         }
         return result;
