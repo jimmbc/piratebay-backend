@@ -22,7 +22,7 @@ public class ProductDao {
 
     public List<ProductModel> findAllActives() {
         // Implmentamos SQL varible binding para evitar SQL INJECTION
-        String query = "SELECT a.requisition_id, a.fecha, b.first_name || ' ' || b.first_surname, b.address " +
+        String query = "SELECT a.requisition_id as requisition, a.fecha_pagado as fecha, b.first_name || ' ' || b.first_surname as name, b.address as address " +
                 "FROM Requisition a, Client b WHERE a.Client_client_id = b.client_id and a.status= 1";
         List<ProductModel> result = null;
         try {

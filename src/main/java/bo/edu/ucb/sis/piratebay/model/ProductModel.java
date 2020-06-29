@@ -4,16 +4,66 @@ import java.util.Date;
 
 public class ProductModel {
     private Integer requisition_id;
-    private Date fecha;
+    private Date fecha_pagado;
+    private Date fecha_preparado;
+    private Date fecha_despachado;
+    private Date fecha_entregado;
     private String nombre;
     private String address;
-
+    private String pelicula;
+    private String nombre_emp;
+    private Integer courier_id;
     public ProductModel() {
     }
 
-    public ProductModel(Integer requisition_id, Date fecha, String nombre, String address) {
+    public ProductModel(Integer requisition_id, Date fecha_pagado, Date fecha_preparado, Date fecha_despachado, Date fecha_entregado, String nombre, String pelicula, String nombre_emp, Integer courier_id) {
         this.requisition_id = requisition_id;
-        this.fecha = fecha;
+        this.fecha_pagado = fecha_pagado;
+        this.fecha_preparado = fecha_preparado;
+        this.fecha_despachado = fecha_despachado;
+        this.fecha_entregado = fecha_entregado;
+        this.nombre = nombre;
+        this.pelicula = pelicula;
+        this.nombre_emp = nombre_emp;
+        this.courier_id = courier_id;
+    }
+
+    public ProductModel(Integer requisition_id, Date fecha_pagado, Date fecha_preparado, Date fecha_despachado, String nombre, String pelicula) {
+        this.requisition_id = requisition_id;
+        this.fecha_pagado = fecha_pagado;
+        this.fecha_preparado = fecha_preparado;
+        this.fecha_despachado = fecha_despachado;
+        this.nombre = nombre;
+        this.pelicula = pelicula;
+    }
+
+    public ProductModel(Integer requisition_id, Date fecha_pagado, Date fecha_preparado, String nombre, String pelicula) {
+        this.requisition_id = requisition_id;
+        this.fecha_pagado = fecha_pagado;
+        this.fecha_preparado = fecha_preparado;
+        this.nombre = nombre;
+        this.pelicula = pelicula;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductModel{" +
+                "requisition_id=" + requisition_id +
+                ", fecha_pagado=" + fecha_pagado +
+                ", fecha_preparado=" + fecha_preparado +
+                ", fecha_despachado=" + fecha_despachado +
+                ", fecha_entregado=" + fecha_entregado +
+                ", nombre='" + nombre + '\'' +
+                ", address='" + address + '\'' +
+                ", pelicula='" + pelicula + '\'' +
+                ", nombre_emp='" + nombre_emp + '\'' +
+                ", courier_id=" + courier_id +
+                '}';
+    }
+
+    public ProductModel(Integer requisition_id, Date fecha_pagado, String nombre, String address) {
+        this.requisition_id = requisition_id;
+        this.fecha_pagado = fecha_pagado;
         this.nombre = nombre;
         this.address = address;
     }
@@ -26,12 +76,36 @@ public class ProductModel {
         this.requisition_id = requisition_id;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public Date getFecha_pagado() {
+        return fecha_pagado;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setFecha_pagado(Date fecha_pagado) {
+        this.fecha_pagado = fecha_pagado;
+    }
+
+    public Date getFecha_preparado() {
+        return fecha_preparado;
+    }
+
+    public void setFecha_preparado(Date fecha_preparado) {
+        this.fecha_preparado = fecha_preparado;
+    }
+
+    public Date getFecha_despachado() {
+        return fecha_despachado;
+    }
+
+    public void setFecha_despachado(Date fecha_despachado) {
+        this.fecha_despachado = fecha_despachado;
+    }
+
+    public Date getFecha_entregado() {
+        return fecha_entregado;
+    }
+
+    public void setFecha_entregado(Date fecha_entregado) {
+        this.fecha_entregado = fecha_entregado;
     }
 
     public String getNombre() {
@@ -50,13 +124,26 @@ public class ProductModel {
         this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "ProductModel{" +
-                "requisition_id=" + requisition_id +
-                ", fecha=" + fecha +
-                ", nombre='" + nombre + '\'' +
-                ", address='" + address + '\'' +
-                '}';
+    public String getNombre_emp() {
+        return nombre_emp;
+    }
+
+    public void setNombre_emp(String nombre_emp) {
+        this.nombre_emp = nombre_emp;
+    }
+
+    public Integer getCourier_id() {
+        return courier_id;
+    }
+
+    public void setCourier_id(Integer courier_id) {
+        this.courier_id = courier_id;
+    }
+    public String getPelicula() {
+        return pelicula;
+    }
+
+    public void setPelicula(String pelicula) {
+        this.pelicula = pelicula;
     }
 }
