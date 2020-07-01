@@ -59,6 +59,4 @@ public class SecurityController {
         response.put("refresh", tokens.get("refresh"));
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-
 }

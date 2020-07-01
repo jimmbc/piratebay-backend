@@ -1,6 +1,7 @@
 package bo.edu.ucb.sis.piratebay.dao;
 
 import bo.edu.ucb.sis.piratebay.model.ProductModel;
+import bo.edu.ucb.sis.piratebay.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -18,6 +19,28 @@ public class ProductDao {
     @Autowired
     public ProductDao(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public List<ProductModel> Product( Integer r) {
+        // Implmentamos SQL varible binding para evitar SQL INJECTION
+        System.out.println(r);
+        String query = "SELECT c.product_name, b.quantity\n" +
+                "FROM Requisition a, detail b, product c WHERE b.product_product_id=c.product_id and b.Requisition_requisition_id= 8 ";
+        List<ProductModel> result = null;
+        try {
+            result = jdbcTemplate.query(query, new RowMapper<ProductModel>() {
+                @Override
+                public ProductModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                    return new ProductModel(resultSet.getString(1),
+                            resultSet.getInt(2));
+                }
+            });
+        } catch (Exception ex) {
+            System.out.println(query);
+            System.out.println("7845");
+            throw new RuntimeException();
+        }
+        return result;
     }
 
     public List<ProductModel> findAllActives() {
@@ -42,4 +65,29 @@ public class ProductDao {
         }
         return result;
     }
+    public List<ProductModel> findProductsByOrderId(int orderId) {
+        // Implmentamos SQL varible binding para evitar SQL INJECTION
+
+        String query = "SELECT c.product_name, b.quantity\n" +
+                "FROM Requisition a, detail b, product c WHERE b.product_product_id=c.product_id and b.Requisition_requisition_id= ? ";
+
+        List<ProductModel> result = null;
+
+        try {
+            result = jdbcTemplate.query(query,
+                    new Object [] {orderId},
+                    new RowMapper<ProductModel>() {
+                        @Override
+                        public ProductModel mapRow(ResultSet resultSet, int i) throws SQLException {
+                            return new ProductModel(resultSet.getString(1),
+                                    resultSet.getInt(2));
+                        }
+                    });
+        } catch (Exception ex) {
+            System.out.println(ex);
+            throw new RuntimeException();
+        }
+        return result;
+    }
+
 }

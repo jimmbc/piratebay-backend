@@ -11,6 +11,7 @@ public class ProductModel {
     private String nombre;
     private String address;
     private String pelicula;
+    private Integer Quantity;
     private String nombre_emp;
     private Integer courier_id;
     public ProductModel() {
@@ -26,6 +27,36 @@ public class ProductModel {
         this.pelicula = pelicula;
         this.nombre_emp = nombre_emp;
         this.courier_id = courier_id;
+    }
+
+    public Integer getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        Quantity = quantity;
+    }
+
+    public ProductModel(String pelicula, Integer quantity) {
+        this.pelicula = pelicula;
+        Quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductModel{" +
+                "requisition_id=" + requisition_id +
+                ", fecha_pagado=" + fecha_pagado +
+                ", fecha_preparado=" + fecha_preparado +
+                ", fecha_despachado=" + fecha_despachado +
+                ", fecha_entregado=" + fecha_entregado +
+                ", nombre='" + nombre + '\'' +
+                ", address='" + address + '\'' +
+                ", pelicula='" + pelicula + '\'' +
+                ", Quantity=" + Quantity +
+                ", nombre_emp='" + nombre_emp + '\'' +
+                ", courier_id=" + courier_id +
+                '}';
     }
 
     public ProductModel(Integer requisition_id, Date fecha_pagado, Date fecha_preparado, Date fecha_despachado, String nombre, String pelicula) {
@@ -45,21 +76,7 @@ public class ProductModel {
         this.pelicula = pelicula;
     }
 
-    @Override
-    public String toString() {
-        return "ProductModel{" +
-                "requisition_id=" + requisition_id +
-                ", fecha_pagado=" + fecha_pagado +
-                ", fecha_preparado=" + fecha_preparado +
-                ", fecha_despachado=" + fecha_despachado +
-                ", fecha_entregado=" + fecha_entregado +
-                ", nombre='" + nombre + '\'' +
-                ", address='" + address + '\'' +
-                ", pelicula='" + pelicula + '\'' +
-                ", nombre_emp='" + nombre_emp + '\'' +
-                ", courier_id=" + courier_id +
-                '}';
-    }
+
 
     public ProductModel(Integer requisition_id, Date fecha_pagado, String nombre, String address) {
         this.requisition_id = requisition_id;

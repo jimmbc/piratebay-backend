@@ -17,7 +17,13 @@ public class ProductBl {
         this.productDao = productDao;
     }
 
-    public List<ProductModel> findAllActives() {
-        return this.productDao.findAllActives();
+    public List<ProductModel> findAllActives() { return this.productDao.findAllActives();
+    }
+
+    public List<ProductModel> Product(Integer r) {
+        return this.productDao.Product(r);
+    }
+    public List<ProductModel> findProductsByOrderId(int orderId) {
+        return this.productDao.findProductsByOrderId(orderId);
     }
 }
