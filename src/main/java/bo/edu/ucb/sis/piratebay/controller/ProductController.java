@@ -3,6 +3,7 @@ package bo.edu.ucb.sis.piratebay.controller;
 import bo.edu.ucb.sis.piratebay.bl.ProductBl;
 import bo.edu.ucb.sis.piratebay.model.OrderModel;
 import bo.edu.ucb.sis.piratebay.model.ProductModel;
+import bo.edu.ucb.sis.piratebay.model.ProductOrderModel;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
@@ -193,5 +194,34 @@ public class ProductController {
         verifier.verify(tokenJwT);
         System.out.println("i");
         return new ResponseEntity<>( this.productBl.updateOrder(orderId), HttpStatus.OK);
+    }
+    @RequestMapping(value = "{orderId}/product", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ProductOrderModel> updateProductOrderById(@RequestHeader("Authorization") String authorization, @PathVariable("orderId") int orderId,
+                                                                    @RequestBody ProductOrderModel productOrderModel) {
+        String tokenJwT = authorization.substring(7);
+        System.out.println("encontrar orden por id");
+        DecodedJWT decodedJWT = JWT.decode(tokenJwT);
+        int userId = Integer.parseInt(decodedJWT.getSubject());
+        System.out.println("Lo esta editando el usuario " + userId);
+
+        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString()) ) {
+            throw new RuntimeException("El token proporcionado no es un token de Autenthication");
+        }
+        // El siguiente código valida si el token es bueno y ademas es un token de authentication
+        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
+        JWTVerifier verifier = JWT.require(algorithm)
+                .withIssuer("PirateBay")
+                .build();
+        verifier.verify(tokenJwT);
+        System.out.println("updating product order in Controller");
+        System.out.println(productOrderModel.getQttyReceived());
+        ProductOrderModel response = this.orderBl.updateProductOrder(
+                productOrderModel.getProductOrderId(),
+                productOrderModel.getQttyCommit(),
+                productOrderModel.getQttyReceived(),
+                userId);
+        //Map <String, Object> response = new HashMap();
+
+        return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
     }
 }
