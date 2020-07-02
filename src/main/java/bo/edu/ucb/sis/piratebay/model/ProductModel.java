@@ -96,6 +96,16 @@ public class ProductModel {
                 '}';
     }
 
+    public ProductModel(Integer requisition_id, String nombre, String address, String pelicula, Integer quantity, Date fecha_pagado, Date fecha_preparado) {
+        this.requisition_id = requisition_id;
+        this.nombre = nombre;
+        this.address = address;
+        this.pelicula = pelicula;
+        Quantity = quantity;
+        this.fecha_pagado = fecha_pagado;
+        this.fecha_preparado = fecha_preparado;
+    }
+
     public ProductModel(Integer requisition_id, Date fecha_pagado, Date fecha_preparado, Date fecha_despachado, String nombre, String pelicula) {
         this.requisition_id = requisition_id;
         this.fecha_pagado = fecha_pagado;
@@ -118,6 +128,15 @@ public class ProductModel {
     public ProductModel(Integer requisition_id, Date fecha_pagado, String nombre, String address) {
         this.requisition_id = requisition_id;
         this.fecha_pagado = fecha_pagado;
+        this.nombre = nombre;
+        this.address = address;
+    }
+
+    public ProductModel(Integer requisition_id, String nombre, String address, Date fecha_pagado, Date fecha_preparado, Date fecha_despachado) {
+        this.requisition_id = requisition_id;
+        this.fecha_pagado = fecha_pagado;
+        this.fecha_preparado = fecha_preparado;
+        this.fecha_despachado = fecha_despachado;
         this.nombre = nombre;
         this.address = address;
     }

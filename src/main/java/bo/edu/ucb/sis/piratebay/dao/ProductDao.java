@@ -67,17 +67,22 @@ public class ProductDao {
     }
     public List<ProductModel> findAllActives1() {
         // Implmentamos SQL varible binding para evitar SQL INJECTION
-        String query = "SELECT a.requisition_id as requisition, a.fecha_pagado as fecha, b.first_name || ' ' || b.first_surname as name, b.address as address " +
-                "FROM Requisition a, Client b WHERE a.Client_client_id = b.client_id and a.status= 1";
+        String query = "SELECT a.requisition_id, b.first_name || ' ' || b.first_surname as nombre, b.address, c.product_name,\n" +
+                "d.quantity, a.fecha_pagado, a.fecha_preparado " +
+                "FROM Requisition a, Client b, Product c, detail d WHERE a.Client_client_id = b.client_id and a.Requisition_id=d.Requisition_requisition_id and\n" +
+                "\t   c.Product_id=d.Product_product_id and a.status=2";
         List<ProductModel> result = null;
         try {
             result = jdbcTemplate.query(query, new RowMapper<ProductModel>() {
                 @Override
                 public ProductModel mapRow(ResultSet resultSet, int i) throws SQLException {
                     return new ProductModel(resultSet.getInt(1),
-                            resultSet.getDate(2),
+                            resultSet.getString(2),
                             resultSet.getString(3),
-                            resultSet.getString(4));
+                            resultSet.getString(4),
+                            resultSet.getInt(5),
+                            resultSet.getDate(6),
+                            resultSet.getDate(7));
                 }
             });
         } catch (Exception ex) {
@@ -89,17 +94,19 @@ public class ProductDao {
     }
     public List<ProductModel> findAllActives2() {
         // Implmentamos SQL varible binding para evitar SQL INJECTION
-        String query = "SELECT a.requisition_id as requisition, a.fecha_pagado as fecha, b.first_name || ' ' || b.first_surname as name, b.address as address " +
-                "FROM Requisition a, Client b WHERE a.Client_client_id = b.client_id and a.status= 1";
+        String query = "SELECT a.requisition_id, b.first_name || ' ' || b.first_surname as nombre, b.address, a.fecha_pagado, a.fecha_preparado, a.fecha_despachado \n" +
+                "FROM Requisition a, Client b WHERE a.Client_client_id = b.client_id and a.status= 3";
         List<ProductModel> result = null;
         try {
             result = jdbcTemplate.query(query, new RowMapper<ProductModel>() {
                 @Override
                 public ProductModel mapRow(ResultSet resultSet, int i) throws SQLException {
                     return new ProductModel(resultSet.getInt(1),
-                            resultSet.getDate(2),
+                            resultSet.getString(2),
                             resultSet.getString(3),
-                            resultSet.getString(4));
+                            resultSet.getDate(4),
+                            resultSet.getDate(5),
+                            resultSet.getDate(6));
                 }
             });
         } catch (Exception ex) {

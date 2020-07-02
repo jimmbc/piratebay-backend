@@ -19,6 +19,10 @@ public class ProductBl {
 
     public List<ProductModel> findAllActives() { return this.productDao.findAllActives();
     }
+    public List<ProductModel> findAllActives1() { return this.productDao.findAllActives1();
+    }
+    public List<ProductModel> findAllActives2() { return this.productDao.findAllActives2();
+    }
     public List<ProductModel> findAllActives3() { return this.productDao.findAllActives3();
     }
 
