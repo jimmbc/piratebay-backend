@@ -19,6 +19,8 @@ public class ProductBl {
 
     public List<ProductModel> findAllActives() { return this.productDao.findAllActives();
     }
+    public List<ProductModel> findAllActives3() { return this.productDao.findAllActives3();
+    }
 
     public List<ProductModel> Product(Integer r) {
         return this.productDao.Product(r);
@@ -26,4 +28,7 @@ public class ProductBl {
     public List<ProductModel> findProductsByOrderId(int orderId) {
         return this.productDao.findProductsByOrderId(orderId);
     }
+    /*public ProductModel updateOrder(Integer orderStatus, Integer orderId, Integer userId ) {
+        return this.productDao.updateOrder(orderStatus, orderId, userId);
+    }*/
 }

@@ -12,6 +12,43 @@ public class ProductModel {
     private String address;
     private String pelicula;
     private Integer Quantity;
+    private Integer Quantity_commit;
+    private Integer Quantity_received;
+    private Integer status;
+
+    public ProductModel(Integer requisition_id, String nombre, Date fecha_pagado, Date fecha_preparado, Date fecha_despachado, Date fecha_entregado) {
+        this.requisition_id = requisition_id;
+        this.nombre = nombre;
+        this.fecha_pagado = fecha_pagado;
+        this.fecha_preparado = fecha_preparado;
+        this.fecha_despachado = fecha_despachado;
+        this.fecha_entregado = fecha_entregado;
+    }
+
+    public Integer getQuantity_commit() {
+        return Quantity_commit;
+    }
+
+    public void setQuantity_commit(Integer quantity_commit) {
+        Quantity_commit = quantity_commit;
+    }
+
+    public Integer getQuantity_received() {
+        return Quantity_received;
+    }
+
+    public void setQuantity_received(Integer quantity_received) {
+        Quantity_received = quantity_received;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     private String nombre_emp;
     private Integer courier_id;
     public ProductModel() {
