@@ -1,6 +1,7 @@
 package bo.edu.ucb.sis.piratebay.controller;
 
 import bo.edu.ucb.sis.piratebay.bl.ProductBl;
+import bo.edu.ucb.sis.piratebay.model.OrderModel;
 import bo.edu.ucb.sis.piratebay.model.ProductModel;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -170,5 +171,27 @@ public class ProductController {
         verifier.verify(tokenJwT);
 
         return new ResponseEntity<>( this.productBl.findProductsByOrderId(orderId), HttpStatus.OK);
+    }
+    @RequestMapping(value = "{orderId}", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<OrderModel> updateOrder(@RequestHeader("Authorization") String authorization, @PathVariable("orderId") int orderId,
+                                                  @RequestBody OrderModel orderModel) {
+        String tokenJwT = authorization.substring(7);
+        System.out.println("encontrar orden por id");
+        DecodedJWT decodedJWT = JWT.decode(tokenJwT);
+        System.out.println("i");
+        int userId = Integer.parseInt(decodedJWT.getSubject());
+
+
+        if(!"AUTHN".equals(decodedJWT.getClaim("type").asString()) ) {
+            throw new RuntimeException("El token proporcionado no es un token de Autenthication");
+        }
+        // El siguiente código valida si el token es bueno y ademas es un token de authentication
+        Algorithm algorithm = Algorithm.HMAC256(secretJwt);
+        JWTVerifier verifier = JWT.require(algorithm)
+                .withIssuer("PirateBay")
+                .build();
+        verifier.verify(tokenJwT);
+        System.out.println("i");
+        return new ResponseEntity<>( this.productBl.updateOrder(orderId), HttpStatus.OK);
     }
 }

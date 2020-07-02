@@ -1,5 +1,6 @@
 package bo.edu.ucb.sis.piratebay.dao;
 
+import bo.edu.ucb.sis.piratebay.model.OrderModel;
 import bo.edu.ucb.sis.piratebay.model.ProductModel;
 import bo.edu.ucb.sis.piratebay.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -164,51 +165,33 @@ public class ProductDao {
         }
         return result;
     }
-  /*  public ProductModel updateOrder(Integer orderStatus, Integer orderId, Integer userId ) {
-        String aux_date = "";
-        if(orderStatus == 1){
-            aux_date = "prepared_date";
-        }else if(orderStatus == 2){
-            aux_date = "shipped_date";
-        }else if(orderStatus == 3){
-            aux_date = "delivered_date";
-        }else{
-            return null;
-        }
+    public OrderModel updateOrder( Integer orderId ) {
         // Implmentamos SQL varible binding para evitar SQL INJECTION
-        String query = "UPDATE \"order\" ord\n" +
-                "SET    order_status = ?,\n" +
-                "       "+aux_date+" = now(),\n" +
-                "       tx_id = usr.user_id,\n" +
-                "       tx_username = usr.username,\n" +
-                "       tx_host = 'local',\n" +
-                "       tx_date = now()\n" +
-                "FROM  \"user\" usr\n" +
-                "WHERE order_id = ?\n" +
-                "  AND usr.user_id = ?\n" +
-                "  AND usr.status = 1\n" +
-                "  AND ord.status = 1\n" +
-                "RETURNING *";
 
-      /*  OrderModel result = null;
+        String query = "UPDATE requisition " +
+                "SET status = 3,  fecha_despachado = now() "+
+                "WHERE status = 2" +
+                "  AND requisition_id = ? " +
+                "RETURNING *";
+        System.out.println("i");
+        System.out.println(query);
+        OrderModel result = null;
+        System.out.println("2");
         try {
             result = jdbcTemplate.queryForObject(query,
-                    new Object [] {orderStatus, orderId, userId},
+                    new Object [] {orderId},
                     new RowMapper<OrderModel>() {
+
                         @Override
                         public OrderModel mapRow(ResultSet resultSet, int i) throws SQLException {
                             return new OrderModel(
                                     resultSet.getInt(1),
-                                    resultSet.getString(5),
-                                    resultSet.getInt(2),
-                                    resultSet.getInt(3),
-                                    resultSet.getInt(4),
-                                    resultSet.getTimestamp(6),
-                                    resultSet.getTimestamp(7),
-                                    resultSet.getTimestamp(8),
-                                    resultSet.getTimestamp(9),
-                                    resultSet.getString(10)
-                            );
+                                    resultSet.getDate(2),
+                                    resultSet.getDate(3),
+                                    resultSet.getDate(4),
+                                    resultSet.getDate(5),
+                                    resultSet.getInt(5),
+                                    resultSet.getInt(6));
                         }
                     });
         } catch (Exception ex) {
@@ -216,5 +199,5 @@ public class ProductDao {
             throw new RuntimeException();
         }
         return result;
-    }*/
+    }
 }

@@ -25,3 +25,14 @@ Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCV
 Accept: application/json
 
 ###
+###
+PATCH http://localhost:8008/api/v1/product/11
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmZWF0dXJlcyI6WyJCVVRUT05fREVMRVRFX1VTRVIiLCJQQUdFX1BST0RVQ1RfTUFOQUdFTUVOVCIsIlBBR0VfVVNFUl9NQU5BR0VNRU5UIl0sInN1YiI6IjIiLCJpc3MiOiJQaXJhdGVCYXkiLCJ0eXBlIjoiQVVUSE4iLCJleHAiOjE1OTM3MTE4OTN9.3OTiFrJxzFN52BEVLY6TkGTPZn0ac3iPznbpPsGzrlY
+Content-Type: application/json
+Accept: application/json
+
+{
+  "orderStatus": "delivered"
+}
+
+###

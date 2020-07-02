@@ -1,6 +1,7 @@
 package bo.edu.ucb.sis.piratebay.bl;
 
 import bo.edu.ucb.sis.piratebay.dao.ProductDao;
+import bo.edu.ucb.sis.piratebay.model.OrderModel;
 import bo.edu.ucb.sis.piratebay.model.ProductModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,7 @@ public class ProductBl {
     public List<ProductModel> findProductsByOrderId(int orderId) {
         return this.productDao.findProductsByOrderId(orderId);
     }
-    /*public ProductModel updateOrder(Integer orderStatus, Integer orderId, Integer userId ) {
-        return this.productDao.updateOrder(orderStatus, orderId, userId);
-    }*/
+    public OrderModel updateOrder(Integer orderId) {
+        return this.productDao.updateOrder(orderId);
+    }
 }
